@@ -1,14 +1,24 @@
 package course.com.springboot3project.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_user")
 public class User implements Serializable
 {
-    private Long Id;
-    private String Name;
-    private String Email;
+    @jakarta.persistence.Id @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "nome")
+    private String name;
+    @Column
+    private String email;
+    @Column(name = "telefone")
     private String phone;
+    @Column(name = "senha")
     private String password;
 
     public User()
@@ -17,41 +27,41 @@ public class User implements Serializable
 
     public User(Long id, String name, String email, String phone, String password)
     {
-        Id = id;
-        Name = name;
-        Email = email;
+        id = id;
+        this.name = name;
+        this.email = email;
         this.phone = phone;
         this.password = password;
     }
 
     public Long getId()
     {
-        return Id;
+        return id;
     }
 
     public void setId(Long id)
     {
-        Id = id;
+        id = id;
     }
 
     public String getName()
     {
-        return Name;
+        return name;
     }
 
     public void setName(String name)
     {
-        Name = name;
+        this.name = name;
     }
 
     public String getEmail()
     {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email)
     {
-        Email = email;
+        this.email = email;
     }
 
     public String getPhone()
@@ -80,13 +90,13 @@ public class User implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(Id, user.Id);
+        return Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hashCode(Id);
+        return Objects.hashCode(id);
     }
 
 }
