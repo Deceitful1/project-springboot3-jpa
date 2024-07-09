@@ -1,9 +1,13 @@
 package course.com.springboot3project.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
+@JsonIdentityInfo(generator= ObjectIdGenerators.UUIDGenerator.class, property="@id")
+
 
 @Entity
 @Table(name = "tb_user")
@@ -18,7 +22,7 @@ public class User implements Serializable
     private String email;
     @Column(name = "telefone")
     private String phone;
-    @Column(name = "senha")
+    @Column(name = "senha   ")
     private String password;
 
     public User()
