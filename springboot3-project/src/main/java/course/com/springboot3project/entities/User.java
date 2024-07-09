@@ -1,6 +1,7 @@
 package course.com.springboot3project.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -31,6 +32,7 @@ public class User implements Serializable
     @Column(name = "pedidos")
 
     @OneToMany(mappedBy = "client")
+            @JsonIgnore
     List<Order> orders = new ArrayList<>();
 
     public User()
@@ -98,10 +100,8 @@ public class User implements Serializable
 
     public List<Order> getOrders()
     {
-      return orders;
+        return orders;
     }
-
-
 
 
     @Override
