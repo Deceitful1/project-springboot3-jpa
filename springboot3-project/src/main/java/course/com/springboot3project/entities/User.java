@@ -5,15 +5,19 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-@JsonIdentityInfo(generator= ObjectIdGenerators.UUIDGenerator.class, property="@id")
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 
 
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable
 {
-    @jakarta.persistence.Id @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @jakarta.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nome")
@@ -24,6 +28,10 @@ public class User implements Serializable
     private String phone;
     @Column(name = "senha   ")
     private String password;
+    @Column(name = "pedidos")
+
+    @OneToMany(mappedBy = "client")
+    List<Order> orders = new ArrayList<>();
 
     public User()
     {
@@ -87,6 +95,14 @@ public class User implements Serializable
     {
         this.password = password;
     }
+
+    public List<Order> getOrders()
+    {
+      return orders;
+    }
+
+
+
 
     @Override
     public boolean equals(Object o)
