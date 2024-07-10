@@ -25,6 +25,7 @@ public class OrderResource
         List<Order> orders = orderService.findAll();
         return ResponseEntity.ok(orders);
     }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<Order> findById(@PathVariable Long id)
     {

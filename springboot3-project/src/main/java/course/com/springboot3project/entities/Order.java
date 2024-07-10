@@ -1,7 +1,7 @@
 package course.com.springboot3project.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import course.com.springboot3project.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -20,6 +20,9 @@ public class Order implements Serializable
     @Column(name = "data")
     private Instant data;
 
+    @Column(name = "status_do_pedido")
+    private Integer status;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
@@ -28,11 +31,12 @@ public class Order implements Serializable
     {
     }
 
-    public Order(Long id, Instant data, User client)
+    public Order(Long id, Instant data, User client,OrderStatus status)
     {
         this.id = id;
         this.data = data;
         this.client = client;
+        setStatus(status);
     }
 
     public Long getId()
@@ -44,10 +48,26 @@ public class Order implements Serializable
     {
         return data;
     }
+    public void setData(Instant data)
+    {
+        this.data = data;
+    }
 
     public User getClient()
     {
         return client;
+    }
+
+    public OrderStatus getStatus()
+    {
+        return OrderStatus.valueOf(status);
+    }
+
+    public void setStatus(OrderStatus status)
+    {
+        if (status != null) {
+            this.status = status.getCod();
+        }
     }
 
     @Override

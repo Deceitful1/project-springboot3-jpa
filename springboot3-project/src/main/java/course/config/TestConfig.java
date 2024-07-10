@@ -2,6 +2,7 @@ package course.config;
 
 import course.com.springboot3project.entities.Order;
 import course.com.springboot3project.entities.User;
+import course.com.springboot3project.entities.enums.OrderStatus;
 import course.com.springboot3project.resources.OrderResource;
 import course.repositories.OrderRepository;
 import course.repositories.UserRepository;
@@ -16,7 +17,7 @@ import java.util.Arrays;
 
 @Configuration
 @Profile("test")
-@EnableJpaRepositories(basePackageClasses = {UserRepository.class, OrderResource.class})
+@EnableJpaRepositories(basePackageClasses = {UserRepository.class, OrderResource.class, OrderStatus.class})
 
 public class TestConfig implements CommandLineRunner
 {
@@ -27,13 +28,13 @@ public class TestConfig implements CommandLineRunner
 
 
     @Override
-    public void run(String... args) throws Exception
+    public void run(String... args)
     {
         User user1 = new User(null, "maria", "maria@gmail.com", "2222-2222", "12345");
         User user2 = new User(null, "alex", "alex@gmail.com", "3333-3333", "2340");
-        Order order = new Order(null, Instant.parse("2022-05-21T12:35:00Z"), user1);
-        Order order2 = new Order(null, Instant.parse("2024-06-21T22:10:00Z"), user1);
-        Order order3 = new Order(null, Instant.parse("2024-06-21T22:10:00Z"), user2);
+        Order order = new Order(null, Instant.parse("2022-05-21T12:35:00Z"), user1, OrderStatus.CANCELED);
+        Order order2 = new Order(null, Instant.parse("2024-06-21T22:10:00Z"), user1,OrderStatus.CANCELED);
+        Order order3 = new Order(null, Instant.parse("2024-06-21T22:10:00Z"), user2,OrderStatus.SHIPPED);
 
         userRepository.saveAll(Arrays.asList(user1, user2));
         orderRepository.saveAll(Arrays.asList(order,order2,order3));
