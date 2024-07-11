@@ -20,8 +20,9 @@ public class Order implements Serializable
     @Column(name = "data")
     private Instant data;
 
-    @Column(name = "status_do_pedido")
-    private Integer status;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -36,7 +37,7 @@ public class Order implements Serializable
         this.id = id;
         this.data = data;
         this.client = client;
-        setStatus(status);
+        this.orderStatus = status;
     }
 
     public Long getId()
@@ -60,14 +61,12 @@ public class Order implements Serializable
 
     public OrderStatus getStatus()
     {
-        return OrderStatus.valueOf(status);
+    return orderStatus;
     }
 
     public void setStatus(OrderStatus status)
     {
-        if (status != null) {
-            this.status = status.getCod();
-        }
+       this.orderStatus = status;
     }
 
     @Override

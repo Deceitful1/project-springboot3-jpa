@@ -31,8 +31,8 @@ public class User implements Serializable
     private String password;
     @Column(name = "pedidos")
 
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
-            @JsonIgnore
     List<Order> orders = new ArrayList<>();
 
     public User()

@@ -1,5 +1,6 @@
 package course.com.springboot3project.entities.enums;
 
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import org.springframework.stereotype.Repository;
 
