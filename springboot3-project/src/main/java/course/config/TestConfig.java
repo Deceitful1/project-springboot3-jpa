@@ -1,14 +1,8 @@
 package course.config;
 
-import course.com.springboot3project.entities.Category;
-import course.com.springboot3project.entities.Order;
-import course.com.springboot3project.entities.Product;
-import course.com.springboot3project.entities.User;
+import course.com.springboot3project.entities.*;
 import course.com.springboot3project.entities.enums.OrderStatus;
-import course.repositories.CategoryRepository;
-import course.repositories.OrderRepository;
-import course.repositories.ProductRepository;
-import course.repositories.UserRepository;
+import course.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,8 @@ public class TestConfig implements CommandLineRunner
     private CategoryRepository categoryRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private OrderItemRepository2 orderItemRepository2;
 
 
     @Override
@@ -66,8 +62,14 @@ public class TestConfig implements CommandLineRunner
         userRepository.saveAll(Arrays.asList(user1, user2));
         orderRepository.saveAll(Arrays.asList(order, order2, order3));
 
+        OrderItem2 oi1 = new OrderItem2(order, p1, 2, p1.getPrice());
+        OrderItem2 oi2 = new OrderItem2(order2, p3, 1, p3.getPrice());
+        OrderItem2 oi3 = new OrderItem2(order3, p3, 2, p3.getPrice());
+        OrderItem2 oi4 = new OrderItem2(order2, p5, 2, p5.getPrice());
+
         userRepository.findAll();
         orderRepository.findAll();
+        orderItemRepository2.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
     }
 }
 
