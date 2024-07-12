@@ -28,6 +28,8 @@ public class TestConfig implements CommandLineRunner
     private ProductRepository productRepository;
     @Autowired
     private OrderItemRepository2 orderItemRepository2;
+    @Autowired
+    private PaymentRepository paymentRepository;
 
 
     @Override
@@ -58,9 +60,12 @@ public class TestConfig implements CommandLineRunner
         Order order = new Order(null, Instant.parse("2022-05-21T12:35:00Z"), user1, OrderStatus.CANCELED);
         Order order2 = new Order(null, Instant.parse("2024-06-21T22:10:00Z"), user1, OrderStatus.CANCELED);
         Order order3 = new Order(null, Instant.parse("2024-06-21T22:10:00Z"), user2, OrderStatus.SHIPPED);
-        Category category = new Category(null, "electronics");
+
+
         userRepository.saveAll(Arrays.asList(user1, user2));
         orderRepository.saveAll(Arrays.asList(order, order2, order3));
+        Category category = new Category(null, "electronics");
+
 
         OrderItem2 oi1 = new OrderItem2(order, p1, 2, p1.getPrice());
         OrderItem2 oi2 = new OrderItem2(order2, p3, 1, p3.getPrice());
@@ -69,7 +74,14 @@ public class TestConfig implements CommandLineRunner
 
         userRepository.findAll();
         orderRepository.findAll();
-        orderItemRepository2.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+        orderItemRepository2.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+
+        Payment payment = new Payment(null, Instant.parse("2024-06-21T22:10:00Z"), order2);
+        order2.setPayment(payment);
+
+        orderRepository.save(order2);
+
     }
 }
 

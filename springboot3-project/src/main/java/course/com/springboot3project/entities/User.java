@@ -103,6 +103,12 @@ public class User implements Serializable
         return orders;
     }
 
+    public void addOrders(Order order)
+    {
+        orders.add(order);
+    }
+
+
 
     @Override
     public boolean equals(Object o)
