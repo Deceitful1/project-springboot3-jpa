@@ -123,6 +123,9 @@ public class Product implements Serializable
     }
 
 
+
+
+
     @Override
     public boolean equals(Object o)
     {
