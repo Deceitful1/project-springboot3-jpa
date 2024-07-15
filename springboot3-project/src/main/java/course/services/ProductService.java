@@ -23,6 +23,11 @@ public class ProductService
         Optional<Product> product = productRepository.findById(id);
         return product.orElse(null);
     }
+    public Product insert(Product product)
+    {
+        return productRepository.save(product);
+    }
+
 
 
 }

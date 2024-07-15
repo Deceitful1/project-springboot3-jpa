@@ -29,6 +29,12 @@ public class UserService
         Optional<User> obj = Optional.ofNullable(userRepository.findByName(name));
         return obj.get();
     }
+    public User insert(User user)
+    {
+        userRepository.save(user);
+        return user;
+    }
+
 
 
 
