@@ -2,6 +2,8 @@ package course.services;
 
 import course.com.springboot3project.entities.User;
 import course.repositories.UserRepository;
+import course.services.exceptions.ResourceNotFoundException;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class UserService
     public User findById(Long id)
     {
         Optional<User> obj = userRepository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User findByName(String name)
