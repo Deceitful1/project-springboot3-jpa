@@ -2,6 +2,7 @@ package course.com.springboot3project.resources;
 
 import course.com.springboot3project.entities.Category;
 import course.services.CategoryService;
+import course.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,26 @@ public class CategoryResource
         category = categoryService.insert(category);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(category.getId()).toUri();
         return ResponseEntity.created(uri).body(category);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id)
+    {
+        try {
+            categoryService.delete(id);
+        }
+        catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody Category category)
+    {
+        category = categoryService.update(id, category);
+        return ResponseEntity.ok().body(category);
     }
 
 

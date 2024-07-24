@@ -29,4 +29,23 @@ public class CategoryService
         return categoryRepository.save(category);
     }
 
+    public Category update(Long id, Category category)
+    {
+        Category cat = categoryRepository.getReferenceById(id);
+        updateData(cat,category);
+        return categoryRepository.save(cat);
+    }
+    public void delete(Long id)
+    {
+        categoryRepository.deleteById(id);
+    }
+
+
+
+    private void updateData(Category cat, Category category)
+    {
+      cat.setName(category.getName());
+    }
+
+
 }
