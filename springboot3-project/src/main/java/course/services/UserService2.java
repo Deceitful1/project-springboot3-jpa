@@ -9,38 +9,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService
+public class UserService2
 {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> findAll()
+    public List<User> getAllUsers()
     {
         return userRepository.findAll();
     }
-
     public User findById(Long id)
     {
-        Optional<User> obj = userRepository.findById(id);
-        return obj.get();
+        Optional<User> user2 = userRepository.findById(id);
+        return user2.orElse(null);
     }
-    public User findByName(String name)
-    {
-        Optional<User> obj = Optional.ofNullable(userRepository.findByName(name));
-        return obj.get();
-    }
+
     public User insert(User user)
     {
-        userRepository.save(user);
-        return user;
+        User user1 = userRepository.save(user);
+        return user1;
     }
-    public void delete(Long id)
-    {
-        userRepository.deleteById(id);
-    }
-
-
-
 
 
 }

@@ -24,4 +24,9 @@ public class CategoryService
         return cat.orElse(null);
     }
 
+    public Category insert(Category category)
+    {
+        return categoryRepository.save(category);
+    }
+
 }
